@@ -1,0 +1,14 @@
+{
+  "name": "promdeobf-bot",
+  "version": "1.0.0",
+  "description": "Prometheus Lua deobfuscator Discord bot",
+  "main": "main.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^17.4.2",
+    "luau-web": "*"
+  }
+}
