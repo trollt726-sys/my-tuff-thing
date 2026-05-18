@@ -7,21 +7,20 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# Create and set up a non-root user with UID 1000 (Required by Hugging Face)
-RUN useradd -m -u 1000 user
+# Use the existing 'node' user (UID 1000) from the base image
 WORKDIR /app
 
 # Copy package config and install production dependencies
-COPY --chown=user:user package.json package-lock.json* ./
+COPY --chown=node:node package.json package-lock.json* ./
 RUN npm install --production
 
 # Copy the rest of the project files
-COPY --chown=user:user . .
+COPY --chown=node:node . .
 
-# Set up runtime permissions
-USER user
+# Run as non-root user
+USER node
 
-# Hugging Face default port bindings
+# Railway provides PORT automatically
 EXPOSE 7860
 ENV PORT=7860
 
