@@ -21,6 +21,9 @@ RUN npm install --production
 # Copy the rest of the project files
 COPY --chown=node:node . .
 
+# Ensure node user can write to /app for temp files
+RUN chmod u+w /app
+
 # Run as non-root user
 USER node
 
