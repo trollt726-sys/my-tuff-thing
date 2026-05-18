@@ -245,18 +245,17 @@ client.on('messageCreate', async (message) => {
             const langMap = { lua: 'LUA', js: 'JAVASCRIPT', ts: 'TYPESCRIPT', py: 'PYTHON', txt: 'PLAIN' };
             const language = langMap[ext] ?? 'PLAIN';
 
-            // Upload to Pastefy v2 API
+            // Upload to Pastefy v1 API
             const pastefyToken = process.env.PASTEFY_TOKEN || '1reB9Lyh1rmTtBydcXlCVW9W62Fhe6aBO4LE1il0biBH9fkjtBjsikXa2DIv';
-            const pasteRes = await fetch('https://pastefy.app/api/v2/paste', {
+            const pasteRes = await fetch('https://pastefy.app/api/v1/paste', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${pastefyToken}`,
                 },
                 body: JSON.stringify({
-                    title: fileName,
+                    name: fileName,
                     content,
-                    type: 'paste',
                     language,
                 }),
             });
